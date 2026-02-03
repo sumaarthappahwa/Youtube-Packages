@@ -1,0 +1,8 @@
+{
+  "name": "TubeBoost Pro - Professional YouTube Marketing Packages",
+  "description": "A high-conversion landing page for YouTube promotion services featuring tiered packages, detailed service breakdowns, and an AI-powered assistant to help clients choose the right plan.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

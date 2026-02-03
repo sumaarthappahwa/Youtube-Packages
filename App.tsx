@@ -29,21 +29,21 @@ const CASE_STUDIES = [
   {
     category: "Lifestyle & Growth",
     metric: "2.5M",
-    label: "Total Views",
+    label: "Lifetime Views",
     subscribers: "+1.8K",
     watchTime: "7.2K",
-    description: "Massive organic reach achieved through content-first strategy and algorithmic hooks. Optimized for high-retention lifestyle audiences.",
-    // Representative dashboard-style image
+    description: "Exponential growth achieved through strategic SEO and viral content hooks. We optimized the channel for long-term algorithmic retention.",
+    // Placeholder representing the provided analytics screenshot
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200" 
   },
   {
-    category: "Commercial Lead Gen",
+    category: "Automotive Business",
     metric: "51.3K",
     label: "Targeted Views",
     subscribers: "+76",
     watchTime: "111.8",
-    description: "High-intent traffic generation for an automotive retail partner. Every view strategically optimized to convert into physical inquiries.",
-    // Representative dashboard-style image
+    description: "Niche lead generation for a car dealership. Every view was crafted to reach high-intent local buyers, resulting in direct showroom visits.",
+    // Placeholder representing the provided analytics screenshot
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200"
   }
 ];
@@ -137,10 +137,10 @@ const App: React.FC = () => {
                     <div className="flex justify-between items-start mb-8">
                       <div>
                         <h4 className="text-red-500 font-black uppercase tracking-widest text-xs mb-2">{study.category}</h4>
-                        <h3 className="text-2xl font-black tracking-tight text-white/90">Confidential Partner</h3>
+                        <h3 className="text-2xl font-black tracking-tight text-white/90 italic">Confidential Project</h3>
                       </div>
                       <div className="bg-red-600 text-white px-4 py-1.5 rounded-2xl font-black text-[10px] shadow-lg uppercase tracking-widest">
-                        Verified Result
+                        Verified
                       </div>
                     </div>
 
@@ -159,18 +159,18 @@ const App: React.FC = () => {
                       </div>
                     </div>
 
-                    <p className="text-gray-400 font-medium leading-relaxed text-sm">
-                      {study.description}
+                    <p className="text-gray-400 font-medium leading-relaxed text-sm italic">
+                      "{study.description}"
                     </p>
                   </div>
-                  <div className="h-64 overflow-hidden relative">
+                  <div className="h-72 overflow-hidden relative">
                     <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
-                       <span className="bg-black/60 backdrop-blur-xl px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase border border-white/10 shadow-2xl">Original Dashboard Anonymized</span>
+                       <span className="bg-black/60 backdrop-blur-xl px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase border border-white/10 shadow-2xl">Original Screenshot Blurred</span>
                     </div>
                     <img 
                       src={study.image} 
                       alt="Blurred Analytics" 
-                      className="w-full h-full object-cover opacity-20 blur-3xl grayscale transition-all duration-1000 group-hover:scale-110"
+                      className="w-full h-full object-cover opacity-20 blur-3xl grayscale transition-all duration-1000 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent z-10"></div>
                   </div>

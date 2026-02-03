@@ -2,14 +2,17 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
 export const getAiStrategyRecommendation = async (userGoal: string) => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Ensure the API key is used correctly from process.env as per guidelines.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
   
-  const prompt = `Based on this user goal: "${userGoal}", recommend one of these 3 YouTube packages: 
-  1. Starter Growth (8 videos, ₹15,000/mo) - Good for beginners.
-  2. Pro Accelerator (16 videos, ad credits, multi-platform, ₹25,000/mo) - Good for scaling business.
-  3. Elite Dominance (30 videos, maximum volume, priority support, ₹45,000/mo) - Good for market leaders.
+  const prompt = `Based on this user goal: "${userGoal}", recommend exactly one of these three YouTube packages and explain why.
+  
+  Packages:
+  - Starter Growth: ₹15,000/mo, 8 videos, best for small brands/beginners starting out.
+  - Pro Accelerator: ₹25,000/mo, 16 videos, ad credits, multi-platform sharing, best for scaling local businesses (like dealerships) or established creators.
+  - Elite Dominance: ₹45,000/mo, 30 videos, maximum reach, priority support, best for market leaders and high-volume content engines.
 
-  Provide the recommendation in JSON format with "plan" and "reasoning" (max 2 sentences).`;
+  You must respond with valid JSON containing "plan" (the plan name) and "reasoning" (maximum 2 concise sentences explaining the strategic match).`;
 
   try {
     const response = await ai.models.generateContent({
@@ -28,13 +31,14 @@ export const getAiStrategyRecommendation = async (userGoal: string) => {
       },
     });
 
-    const result = JSON.parse(response.text || '{}');
-    return result;
+    const text = response.text || "{}";
+    return JSON.parse(text);
   } catch (error) {
-    console.error("AI Error:", error);
+    console.error("Gemini AI Recommendation failed:", error);
+    // Fallback recommendation
     return {
       plan: "Pro Accelerator",
-      reasoning: "Based on our experience, the Pro plan offers the best balance of volume and ad-driven growth for most business goals."
+      reasoning: "The Pro Accelerator plan is generally our best value for businesses seeking a balance between volume and targeted growth via ad credits."
     };
   }
 };

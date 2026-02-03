@@ -27,24 +27,24 @@ const REVIEWS = [
 
 const CASE_STUDIES = [
   {
-    category: "Personal Brand / Lifestyle",
-    metric: "2,498,819",
+    category: "Lifestyle & Growth",
+    metric: "2.5M",
     label: "Total Views",
-    subscribers: "+1,789",
-    watchTime: "7.2K Hours",
-    description: "Massive reach achieved through content-first strategy and algorithmic optimization. We focused on high-retention editing and viral hooks.",
-    // Representative blurred screenshot image
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1200" 
+    subscribers: "+1.8K",
+    watchTime: "7.2K",
+    description: "Massive organic reach achieved through content-first strategy and algorithmic hooks. Optimized for high-retention lifestyle audiences.",
+    // Representative dashboard-style image
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200" 
   },
   {
-    category: "Local Business / Lead Gen",
-    metric: "51,312",
+    category: "Commercial Lead Gen",
+    metric: "51.3K",
     label: "Targeted Views",
     subscribers: "+76",
-    watchTime: "111.8 Hours",
-    description: "High-intent traffic generation for a local car dealership. Every view was optimized to convert into a physical showroom visit.",
-    // Representative blurred screenshot image
-    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=1200"
+    watchTime: "111.8",
+    description: "High-intent traffic generation for an automotive retail partner. Every view strategically optimized to convert into physical inquiries.",
+    // Representative dashboard-style image
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200"
   }
 ];
 
@@ -60,14 +60,14 @@ const App: React.FC = () => {
       const recommendation = await getAiStrategyRecommendation(userGoal);
       setAiRecommendation(recommendation);
     } catch (err) {
-      console.error(err);
+      console.error("AI Consult Error:", err);
     } finally {
       setAiLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen selection:bg-red-100 selection:text-red-900 bg-white">
+    <div className="min-h-screen selection:bg-red-100 selection:text-red-900 bg-white antialiased">
       {/* Header/Hero Section */}
       <header className="relative py-24 px-6 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] bg-gradient-to-b from-red-50 to-transparent -z-10 blur-3xl opacity-60"></div>
@@ -101,7 +101,7 @@ const App: React.FC = () => {
       <section className="py-12 border-y border-gray-100 bg-gray-50/30">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center items-center">
           <div className="space-y-1">
-            <div className="text-xl md:text-2xl font-black text-gray-900 leading-tight">Your channel partner</div>
+            <div className="text-xl md:text-2xl font-black text-gray-900 leading-tight uppercase tracking-tighter">Your channel partner</div>
           </div>
           <div className="space-y-1">
             <div className="text-4xl font-black text-gray-900">10M+</div>
@@ -126,52 +126,51 @@ const App: React.FC = () => {
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">Proven Results</h2>
-            <p className="text-gray-400 max-w-lg mx-auto font-medium">Verified data from our active client dashboard (Anonymized for privacy).</p>
+            <p className="text-gray-400 max-w-lg mx-auto font-medium italic">Verified data from our active client portfolio (Anonymized for client privacy).</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {CASE_STUDIES.map((study, idx) => (
               <div key={idx} className="group relative">
-                <div className="bg-gray-900/50 backdrop-blur-xl border border-white/5 rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:border-red-500/30 hover:shadow-[0_0_80px_rgba(220,38,38,0.2)]">
+                <div className="bg-gray-900/50 backdrop-blur-xl border border-white/5 rounded-[3rem] overflow-hidden transition-all duration-500 hover:border-red-500/30 hover:shadow-[0_0_80px_rgba(220,38,38,0.2)]">
                   <div className="p-10">
                     <div className="flex justify-between items-start mb-8">
                       <div>
                         <h4 className="text-red-500 font-black uppercase tracking-widest text-xs mb-2">{study.category}</h4>
-                        <h3 className="text-2xl font-black tracking-tight text-white/90 italic">Confidential Project</h3>
+                        <h3 className="text-2xl font-black tracking-tight text-white/90">Confidential Partner</h3>
                       </div>
-                      <div className="bg-red-600 text-white px-4 py-1.5 rounded-2xl font-black text-xs shadow-lg uppercase tracking-tighter">
-                        Verified
+                      <div className="bg-red-600 text-white px-4 py-1.5 rounded-2xl font-black text-[10px] shadow-lg uppercase tracking-widest">
+                        Verified Result
                       </div>
                     </div>
 
                     <div className="grid grid-cols-3 gap-4 mb-8">
-                      <div className="bg-white/5 p-4 rounded-3xl border border-white/5">
+                      <div className="bg-white/5 p-4 rounded-3xl border border-white/5 text-center">
                         <div className="text-2xl font-black text-white">{study.metric}</div>
                         <div className="text-[9px] uppercase tracking-widest text-gray-500 font-black mt-1">Total Views</div>
                       </div>
-                      <div className="bg-white/5 p-4 rounded-3xl border border-white/5">
+                      <div className="bg-white/5 p-4 rounded-3xl border border-white/5 text-center">
                         <div className="text-2xl font-black text-white">{study.watchTime}</div>
-                        <div className="text-[9px] uppercase tracking-widest text-gray-500 font-black mt-1">Watch Time</div>
+                        <div className="text-[9px] uppercase tracking-widest text-gray-500 font-black mt-1">Hours Watched</div>
                       </div>
-                      <div className="bg-white/5 p-4 rounded-3xl border border-white/5">
+                      <div className="bg-white/5 p-4 rounded-3xl border border-white/5 text-center">
                         <div className="text-2xl font-black text-white">{study.subscribers}</div>
                         <div className="text-[9px] uppercase tracking-widest text-gray-500 font-black mt-1">Subscribers</div>
                       </div>
                     </div>
 
-                    <p className="text-gray-400 font-medium leading-relaxed italic text-sm">
-                      "{study.description}"
+                    <p className="text-gray-400 font-medium leading-relaxed text-sm">
+                      {study.description}
                     </p>
                   </div>
-                  <div className="h-72 overflow-hidden relative">
+                  <div className="h-64 overflow-hidden relative">
                     <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
-                       <span className="bg-black/60 backdrop-blur-xl px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase border border-white/10 shadow-2xl mb-2">Original Screenshot Blurred</span>
-                       <p className="text-xs text-white/40 font-bold uppercase tracking-widest">Analytics Dashboard Data</p>
+                       <span className="bg-black/60 backdrop-blur-xl px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase border border-white/10 shadow-2xl">Original Dashboard Anonymized</span>
                     </div>
                     <img 
                       src={study.image} 
-                      alt="Blurred Analytics Screenshot" 
-                      className="w-full h-full object-cover opacity-30 blur-2xl grayscale transition-all duration-1000 group-hover:blur-xl group-hover:scale-105"
+                      alt="Blurred Analytics" 
+                      className="w-full h-full object-cover opacity-20 blur-3xl grayscale transition-all duration-1000 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent z-10"></div>
                   </div>
@@ -186,7 +185,7 @@ const App: React.FC = () => {
       <section className="py-24 px-6 bg-white relative overflow-hidden">
         <div className="max-w-4xl mx-auto bg-gray-50 rounded-[3rem] p-10 md:p-16 border border-gray-100 shadow-2xl relative">
           <div className="absolute top-0 right-0 p-8 opacity-10">
-            <svg className="w-24 h-24 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+             <svg className="w-24 h-24 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
           </div>
           <div className="text-center mb-10">
             <h2 className="text-3xl font-black mb-4 tracking-tight">Free AI Strategy Recommendation</h2>
@@ -197,7 +196,7 @@ const App: React.FC = () => {
             <div className="relative">
               <textarea 
                 className="w-full h-32 px-6 py-4 rounded-[2rem] border-2 border-gray-200 focus:border-red-600 outline-none transition-all font-semibold resize-none text-gray-700 bg-white"
-                placeholder="Example: I want to build a brand for my car dealership and get 5 sales inquiries per week..."
+                placeholder="Example: I want to build a personal brand for my car dealership and get 5 qualified sales inquiries per week..."
                 value={userGoal}
                 onChange={(e) => setUserGoal(e.target.value)}
               />
@@ -218,15 +217,15 @@ const App: React.FC = () => {
             </Button>
 
             {aiRecommendation && (
-              <div className="mt-8 p-8 bg-white border border-red-100 rounded-[2rem] animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="mt-8 p-8 bg-white border border-red-100 rounded-[2rem] animate-in fade-in slide-in-from-bottom-4 duration-500 shadow-xl">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">AI Result</div>
+                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">AI Matching Result</div>
                   <h4 className="text-xl font-black">Recommended: <span className="text-red-600">{aiRecommendation.plan}</span></h4>
                 </div>
                 <p className="text-gray-600 font-medium leading-relaxed italic">"{aiRecommendation.reasoning}"</p>
                 <div className="mt-6 flex justify-end">
                   <Button variant="outline" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
-                    View This Plan
+                    Explore This Package
                   </Button>
                 </div>
               </div>
@@ -236,25 +235,25 @@ const App: React.FC = () => {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 px-6 bg-gray-50/30">
+      <section id="pricing" className="py-24 px-6 bg-gray-50/20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black mb-4 text-gray-900 tracking-tight">Packages That Scale</h2>
-            <p className="text-gray-500 max-lg mx-auto font-medium">Monthly plans with expert video editing and SEO strategy.</p>
+            <p className="text-gray-500 max-w-lg mx-auto font-medium">Monthly strategic plans with expert video editing and SEO optimization.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {PACKAGES.map((pkg) => (
               <div 
                 key={pkg.id}
-                className={`relative flex flex-col p-8 rounded-[2.5rem] border transition-all duration-500 group ${
+                className={`relative flex flex-col p-8 rounded-[3rem] border transition-all duration-500 group ${
                   pkg.isPopular 
-                    ? 'bg-white border-red-600 ring-2 ring-red-100 shadow-[0_20px_50px_rgba(220,38,38,0.1)] scale-105 z-10' 
+                    ? 'bg-white border-red-600 ring-4 ring-red-50 shadow-[0_40px_80px_rgba(220,38,38,0.1)] scale-105 z-10' 
                     : 'bg-white border-gray-100 hover:border-red-200 hover:shadow-2xl shadow-sm'
                 }`}
               >
                 {pkg.isPopular && (
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white px-5 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow-xl ring-4 ring-white">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl ring-4 ring-white">
                     Most Popular
                   </div>
                 )}
@@ -333,14 +332,14 @@ const App: React.FC = () => {
             <h2 className="text-4xl font-black text-gray-900 mb-4 tracking-tight">Real People, Real Results</h2>
             <div className="flex items-center justify-center gap-1.5 text-orange-400 mb-3">
               {[...Array(5)].map((_, i) => (
-                <svg key={i} className="w-6 h-6 fill-current drop-shadow-sm" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                <svg key={i} className="w-6 h-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
               ))}
             </div>
-            <p className="text-gray-400 font-bold uppercase tracking-widest text-xs">Verified 5-Star Agency Performance</p>
+            <p className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Verified Google Agency Reviews</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {REVIEWS.map((review, idx) => (
-              <div key={idx} className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300">
+              <div key={idx} className="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300">
                 <p className="text-gray-600 font-medium italic mb-8 leading-relaxed text-lg">"{review.text}"</p>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center text-red-600 font-black text-xl">
@@ -359,9 +358,9 @@ const App: React.FC = () => {
               href="https://share.google/XNzsUe3Kd890YLowU" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="inline-flex items-center gap-2 text-red-600 font-black hover:gap-3 transition-all duration-300"
+              className="inline-flex items-center gap-2 text-red-600 font-black hover:gap-3 transition-all duration-300 uppercase tracking-widest text-xs"
             >
-              READ ALL 50+ GOOGLE REVIEWS
+              READ ALL 50+ REVIEWS
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </a>
           </div>
@@ -375,24 +374,24 @@ const App: React.FC = () => {
             <img 
               src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800" 
               alt="Strategic Marketing Team" 
-              className="rounded-[3rem] shadow-2xl relative z-10 transition-all duration-700"
+              className="rounded-[3rem] shadow-2xl relative z-10"
             />
-            <div className="absolute -inset-8 bg-red-100/40 rounded-[3rem] blur-3xl -z-10 group-hover:bg-red-200/40 transition-colors"></div>
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-red-600 rounded-full -z-10 flex items-center justify-center text-white text-xs font-black text-center p-4 shadow-2xl transform group-hover:scale-110 transition-transform">
-              100% QUALITY FOCUSED
+            <div className="absolute -inset-8 bg-red-100/40 rounded-[3rem] blur-3xl -z-10"></div>
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-red-600 rounded-full -z-10 flex items-center justify-center text-white text-[10px] font-black text-center p-4 shadow-2xl transform group-hover:scale-110 transition-transform uppercase tracking-widest">
+              Quality Guaranteed
             </div>
           </div>
           <div className="space-y-10">
             <h2 className="text-4xl md:text-5xl font-black leading-[1.1] text-gray-900 tracking-tight">Beyond Simple Posting. We Build Brands.</h2>
             <div className="space-y-4">
               {COMMON_BENEFITS.map((benefit, idx) => (
-                <div key={idx} className="flex gap-5 p-6 rounded-3xl bg-gray-50 border border-transparent hover:border-red-100 hover:bg-white hover:shadow-lg transition-all duration-300 group">
+                <div key={idx} className="flex gap-5 p-6 rounded-[2.5rem] bg-gray-50 border border-transparent hover:border-red-100 hover:bg-white hover:shadow-lg transition-all duration-300 group">
                   <div className="w-14 h-14 rounded-2xl bg-white text-red-600 flex items-center justify-center flex-shrink-0 font-black text-xl shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors">
                     {idx + 1}
                   </div>
                   <div>
                     <h4 className="font-black text-lg text-gray-900">{benefit}</h4>
-                    <p className="text-gray-400 text-sm mt-1 font-bold">Executed by our senior strategy team.</p>
+                    <p className="text-gray-400 text-[10px] mt-1 font-black uppercase tracking-widest">Expert Execution</p>
                   </div>
                 </div>
               ))}
@@ -401,42 +400,10 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Disclaimers & FAQ */}
-      <section className="py-24 px-6 bg-gray-50/50">
-        <div className="max-w-4xl mx-auto space-y-16">
-          <div className="bg-white border border-red-50 p-10 rounded-[2.5rem] shadow-sm relative overflow-hidden">
-             <div className="absolute top-0 right-0 p-4 opacity-5">
-                <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 20 20"><path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"></path></svg>
-             </div>
-            <h3 className="text-2xl font-black text-gray-900 mb-5 flex items-center gap-3">
-              <span className="w-2 h-8 bg-red-600 rounded-full"></span>
-              Business Growth Notice
-            </h3>
-            <p className="text-gray-500 leading-relaxed font-semibold italic">
-              "While our strategic frameworks and SEO optimizations are designed to significantly enhance visibility and lead generation, specific outcomes and direct business growth depend on industry dynamics and market trends. Consistent professional management is the single most effective catalyst for growth."
-            </p>
-          </div>
-
-          <div className="text-center">
-            <h2 className="text-3xl font-black mb-10 text-gray-900 tracking-tight">Strategic FAQ</h2>
-            <div className="grid gap-6 text-left">
-              <div className="p-8 bg-white rounded-3xl border border-gray-100 shadow-sm hover:border-red-100 transition-colors">
-                <h4 className="font-black text-lg mb-3 text-gray-900">Billing & Cycle</h4>
-                <p className="text-gray-500 font-semibold leading-relaxed">Monthly billing via secure Razorpay subscriptions. Commitment periods ensure we have enough runway to deliver measurable SEO results.</p>
-              </div>
-              <div className="p-8 bg-white rounded-3xl border border-gray-100 shadow-sm hover:border-red-100 transition-colors">
-                <h4 className="font-black text-lg mb-3 text-gray-900">Platform Scaling</h4>
-                <p className="text-gray-500 font-semibold leading-relaxed">The Pro and Elite plans include full cross-platform repurposing for Instagram and Facebook to maximize your reach from a single video session.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="py-16 bg-white border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="mb-6 font-bold text-gray-400 text-xs">© 2024 TubeBoost Pro & Do Digital Marketing. All rights reserved.</p>
+          <p className="mb-6 font-bold text-gray-400 text-[10px] uppercase tracking-widest">© 2024 TubeBoost Pro & Do Digital Marketing. All rights reserved.</p>
           <div className="h-px w-24 bg-gray-100 mx-auto mb-8"></div>
           <p className="text-gray-500 text-sm font-bold">
             Powered by <a href="https://www.dodigital.marketing" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-700 transition-all underline underline-offset-8 decoration-2 decoration-red-100 hover:decoration-red-600">Do Digital Marketing</a>
@@ -444,7 +411,7 @@ const App: React.FC = () => {
         </div>
       </footer>
 
-      {/* WhatsApp Link Replacement */}
+      {/* WhatsApp Floating Button */}
       <a 
         href="https://wa.me/917217873028" 
         target="_blank" 

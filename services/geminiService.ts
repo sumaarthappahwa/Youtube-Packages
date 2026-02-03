@@ -2,16 +2,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
 export const getAiStrategyRecommendation = async (userGoal: string) => {
-  const apiKey = process.env.API_KEY;
-  if (!apiKey) {
-    console.warn("API_KEY not found in process.env");
-    return {
-      plan: "Pro Accelerator",
-      reasoning: "The Pro Accelerator plan is generally our best value for businesses seeking a balance between volume and targeted growth."
-    };
-  }
-
-  const ai = new GoogleGenAI({ apiKey });
+  // Ensure the API key is used correctly from process.env as per guidelines.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
   
   const prompt = `Based on this user goal: "${userGoal}", recommend exactly one of these three YouTube packages and explain why.
   
@@ -43,6 +35,7 @@ export const getAiStrategyRecommendation = async (userGoal: string) => {
     return JSON.parse(text);
   } catch (error) {
     console.error("Gemini AI Recommendation failed:", error);
+    // Fallback recommendation
     return {
       plan: "Pro Accelerator",
       reasoning: "The Pro Accelerator plan is generally our best value for businesses seeking a balance between volume and targeted growth via ad credits."

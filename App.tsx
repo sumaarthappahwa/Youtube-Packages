@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { PACKAGES, COMMON_BENEFITS } from './constants';
 import { Button } from './components/Button';
+import { getAiStrategyRecommendation } from './services/geminiService';
 
 const REVIEWS = [
   {
@@ -26,30 +27,47 @@ const REVIEWS = [
 
 const CASE_STUDIES = [
   {
-    channel: "Lifestyle & Growth Client",
-    metric: "2.5 Million+",
-    label: "Lifetime Views",
-    subscribers: "+1.8K",
+    category: "Personal Brand / Lifestyle",
+    metric: "2,498,819",
+    label: "Total Views",
+    subscribers: "+1,789",
     watchTime: "7.2K Hours",
-    description: "Exponential growth achieved through strategic SEO and consistent content ideation in the lifestyle niche.",
-    // Using descriptive placeholder for the blurred screenshot image
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" 
+    description: "Massive reach achieved through content-first strategy and algorithmic optimization. We focused on high-retention editing and viral hooks.",
+    // Representative blurred screenshot image
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1200" 
   },
   {
-    channel: "Automotive Business Client",
-    metric: "51,300+",
-    label: "Strategic Views",
+    category: "Local Business / Lead Gen",
+    metric: "51,312",
+    label: "Targeted Views",
     subscribers: "+76",
     watchTime: "111.8 Hours",
-    description: "Targeted lead generation for a commercial automotive partner, turning specific views into high-value sales inquiries.",
-    // Using descriptive placeholder for the blurred screenshot image
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800"
+    description: "High-intent traffic generation for a local car dealership. Every view was optimized to convert into a physical showroom visit.",
+    // Representative blurred screenshot image
+    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=1200"
   }
 ];
 
 const App: React.FC = () => {
+  const [userGoal, setUserGoal] = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiRecommendation, setAiRecommendation] = useState<{plan: string, reasoning: string} | null>(null);
+
+  const handleAiConsult = async () => {
+    if (!userGoal.trim()) return;
+    setAiLoading(true);
+    try {
+      const recommendation = await getAiStrategyRecommendation(userGoal);
+      setAiRecommendation(recommendation);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen selection:bg-red-100 selection:text-red-900">
+    <div className="min-h-screen selection:bg-red-100 selection:text-red-900 bg-white">
       {/* Header/Hero Section */}
       <header className="relative py-24 px-6 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] bg-gradient-to-b from-red-50 to-transparent -z-10 blur-3xl opacity-60"></div>
@@ -101,60 +119,61 @@ const App: React.FC = () => {
       </section>
 
       {/* Results Section */}
-      <section className="py-24 px-6 bg-gray-900 text-white overflow-hidden relative">
+      <section className="py-24 px-6 bg-gray-950 text-white overflow-hidden relative">
         <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/10 blur-[120px] rounded-full -mr-48 -mt-48"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-600/10 blur-[120px] rounded-full -ml-48 -mb-48"></div>
         
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">Proven Results</h2>
-            <p className="text-gray-400 max-w-lg mx-auto font-medium">Anonymized analytics from our high-performing client portfolio.</p>
+            <p className="text-gray-400 max-w-lg mx-auto font-medium">Verified data from our active client dashboard (Anonymized for privacy).</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {CASE_STUDIES.map((study, idx) => (
               <div key={idx} className="group relative">
-                <div className="bg-gray-800/50 backdrop-blur-xl border border-gray-700 rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:border-red-500/50 hover:shadow-[0_0_50px_rgba(220,38,38,0.15)]">
+                <div className="bg-gray-900/50 backdrop-blur-xl border border-white/5 rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:border-red-500/30 hover:shadow-[0_0_80px_rgba(220,38,38,0.2)]">
                   <div className="p-10">
                     <div className="flex justify-between items-start mb-8">
                       <div>
-                        <h4 className="text-red-500 font-black uppercase tracking-widest text-xs mb-2">Verified Growth</h4>
-                        <h3 className="text-3xl font-black tracking-tight">{study.channel}</h3>
+                        <h4 className="text-red-500 font-black uppercase tracking-widest text-xs mb-2">{study.category}</h4>
+                        <h3 className="text-2xl font-black tracking-tight text-white/90 italic">Confidential Project</h3>
                       </div>
-                      <div className="bg-red-600 text-white px-4 py-2 rounded-2xl font-black text-sm shadow-lg">
-                        CONFIDENTIAL
+                      <div className="bg-red-600 text-white px-4 py-1.5 rounded-2xl font-black text-xs shadow-lg uppercase tracking-tighter">
+                        Verified
                       </div>
                     </div>
 
                     <div className="grid grid-cols-3 gap-4 mb-8">
-                      <div className="bg-gray-900/50 p-4 rounded-3xl border border-gray-700/50">
+                      <div className="bg-white/5 p-4 rounded-3xl border border-white/5">
                         <div className="text-2xl font-black text-white">{study.metric}</div>
                         <div className="text-[9px] uppercase tracking-widest text-gray-500 font-black mt-1">Total Views</div>
                       </div>
-                      <div className="bg-gray-900/50 p-4 rounded-3xl border border-gray-700/50">
+                      <div className="bg-white/5 p-4 rounded-3xl border border-white/5">
                         <div className="text-2xl font-black text-white">{study.watchTime}</div>
                         <div className="text-[9px] uppercase tracking-widest text-gray-500 font-black mt-1">Watch Time</div>
                       </div>
-                      <div className="bg-gray-900/50 p-4 rounded-3xl border border-gray-700/50">
+                      <div className="bg-white/5 p-4 rounded-3xl border border-white/5">
                         <div className="text-2xl font-black text-white">{study.subscribers}</div>
                         <div className="text-[9px] uppercase tracking-widest text-gray-500 font-black mt-1">Subscribers</div>
                       </div>
                     </div>
 
-                    <p className="text-gray-400 font-medium leading-relaxed italic">
+                    <p className="text-gray-400 font-medium leading-relaxed italic text-sm">
                       "{study.description}"
                     </p>
                   </div>
-                  <div className="h-64 overflow-hidden relative">
-                    <div className="absolute inset-0 z-20 flex items-center justify-center">
-                       <span className="bg-black/40 backdrop-blur-md px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase border border-white/10">Verified Dashboard Data</span>
+                  <div className="h-72 overflow-hidden relative">
+                    <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
+                       <span className="bg-black/60 backdrop-blur-xl px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase border border-white/10 shadow-2xl mb-2">Original Screenshot Blurred</span>
+                       <p className="text-xs text-white/40 font-bold uppercase tracking-widest">Analytics Dashboard Data</p>
                     </div>
                     <img 
                       src={study.image} 
                       alt="Blurred Analytics Screenshot" 
-                      className="w-full h-full object-cover opacity-60 blur-md grayscale transition-all duration-700 group-hover:blur-sm group-hover:scale-105"
+                      className="w-full h-full object-cover opacity-30 blur-2xl grayscale transition-all duration-1000 group-hover:blur-xl group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent z-10"></div>
                   </div>
                 </div>
               </div>
@@ -163,12 +182,65 @@ const App: React.FC = () => {
         </div>
       </section>
 
+      {/* AI Strategy Consult Section */}
+      <section className="py-24 px-6 bg-white relative overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-gray-50 rounded-[3rem] p-10 md:p-16 border border-gray-100 shadow-2xl relative">
+          <div className="absolute top-0 right-0 p-8 opacity-10">
+            <svg className="w-24 h-24 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          </div>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-black mb-4 tracking-tight">Free AI Strategy Recommendation</h2>
+            <p className="text-gray-500 font-medium">Tell us your channel goal, and our Gemini AI will pick the perfect plan for you.</p>
+          </div>
+          
+          <div className="space-y-6">
+            <div className="relative">
+              <textarea 
+                className="w-full h-32 px-6 py-4 rounded-[2rem] border-2 border-gray-200 focus:border-red-600 outline-none transition-all font-semibold resize-none text-gray-700 bg-white"
+                placeholder="Example: I want to build a brand for my car dealership and get 5 sales inquiries per week..."
+                value={userGoal}
+                onChange={(e) => setUserGoal(e.target.value)}
+              />
+            </div>
+            
+            <Button 
+              fullWidth 
+              onClick={handleAiConsult}
+              disabled={aiLoading || !userGoal.trim()}
+              className="py-5 text-xl"
+            >
+              {aiLoading ? (
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Analyzing Goals...
+                </div>
+              ) : 'Get Recommendation'}
+            </Button>
+
+            {aiRecommendation && (
+              <div className="mt-8 p-8 bg-white border border-red-100 rounded-[2rem] animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">AI Result</div>
+                  <h4 className="text-xl font-black">Recommended: <span className="text-red-600">{aiRecommendation.plan}</span></h4>
+                </div>
+                <p className="text-gray-600 font-medium leading-relaxed italic">"{aiRecommendation.reasoning}"</p>
+                <div className="mt-6 flex justify-end">
+                  <Button variant="outline" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
+                    View This Plan
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 px-6">
+      <section id="pricing" className="py-24 px-6 bg-gray-50/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-4 text-gray-900">Packages That Scale</h2>
-            <p className="text-gray-500 max-w-lg mx-auto font-medium">Monthly plans with expert video editing and SEO strategy.</p>
+            <h2 className="text-4xl md:text-5xl font-black mb-4 text-gray-900 tracking-tight">Packages That Scale</h2>
+            <p className="text-gray-500 max-lg mx-auto font-medium">Monthly plans with expert video editing and SEO strategy.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -255,7 +327,7 @@ const App: React.FC = () => {
       </section>
 
       {/* Google Reviews Section */}
-      <section className="py-24 bg-gray-50 px-6">
+      <section className="py-24 bg-white px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black text-gray-900 mb-4 tracking-tight">Real People, Real Results</h2>

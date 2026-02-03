@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { PACKAGES, COMMON_BENEFITS } from './constants.ts';
 import { Button } from './components/Button.tsx';
@@ -152,7 +153,7 @@ const App: React.FC = () => {
                       </div>
                       <div className="bg-white/5 p-4 rounded-3xl border border-white/5 text-center">
                         <div className="text-2xl font-black text-white">{study.subscribers}</div>
-                        <div className="text-[9px] uppercase tracking-widest text-gray-500 font-black mt-1">Subscribers</div>
+                        <div className="text-[9px] uppercase tracking-widest text-gray-400 font-black mt-1">Subscribers</div>
                       </div>
                     </div>
 
@@ -306,10 +307,100 @@ const App: React.FC = () => {
         </div>
       </section>
 
+      {/* Google Reviews Section */}
+      <section className="py-24 px-6 bg-white relative">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black mb-4 text-gray-900 tracking-tight">Real Results from Real People</h2>
+            <div className="flex items-center justify-center gap-1 text-orange-400 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} className="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
+            <p className="text-gray-500 font-bold uppercase tracking-widest text-xs">Verified 5-Star Reviews on Google</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {REVIEWS.map((review, idx) => (
+              <div key={idx} className="bg-gray-50 p-8 rounded-[2.5rem] border border-gray-100 hover:shadow-2xl transition-all duration-300 group">
+                <div className="mb-6 flex gap-1 text-orange-400">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-gray-700 font-medium italic mb-8 leading-relaxed">
+                  "{review.text}"
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center font-black text-lg shadow-inner">
+                    {review.name.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="font-black text-gray-900 leading-none mb-1">{review.name}</h4>
+                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{review.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <a 
+              href="https://share.google/XNzsUe3Kd890YLowU" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-red-600 font-black hover:gap-4 transition-all uppercase tracking-widest text-xs"
+            >
+              Read All Google Reviews
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-24 bg-gray-50 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+          <div className="relative group px-4">
+            <img 
+              src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800" 
+              alt="Strategic Marketing Team" 
+              className="rounded-[3rem] shadow-2xl relative z-10"
+            />
+            <div className="absolute -inset-8 bg-red-100/40 rounded-[3rem] blur-3xl -z-10"></div>
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-red-600 rounded-full -z-10 flex items-center justify-center text-white text-[10px] font-black text-center p-4 shadow-2xl transform group-hover:scale-110 transition-transform uppercase tracking-widest">
+              Quality Guaranteed
+            </div>
+          </div>
+          <div className="space-y-10">
+            <h2 className="text-4xl md:text-5xl font-black leading-[1.1] text-gray-900 tracking-tight">Beyond Simple Posting. We Build Brands.</h2>
+            <div className="space-y-4">
+              {COMMON_BENEFITS.map((benefit, idx) => (
+                <div key={idx} className="flex gap-5 p-6 rounded-[2.5rem] bg-white border border-transparent hover:border-red-100 hover:shadow-lg transition-all duration-300 group">
+                  <div className="w-14 h-14 rounded-2xl bg-gray-50 text-red-600 flex items-center justify-center flex-shrink-0 font-black text-xl group-hover:bg-red-600 group-hover:text-white transition-colors">
+                    {idx + 1}
+                  </div>
+                  <div>
+                    <h4 className="font-black text-lg text-gray-900">{benefit}</h4>
+                    <p className="text-gray-400 text-[10px] mt-1 font-black uppercase tracking-widest">Expert Execution</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="py-16 bg-white border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="mb-6 font-bold text-gray-400 text-[10px] uppercase tracking-widest">© 2024 TubeBoost Pro & Do Digital Marketing. All rights reserved.</p>
+          <p className="mb-6 font-bold text-gray-400 text-[10px] uppercase tracking-widest">© 2026 Do Digital Marketing. All rights reserved.</p>
           <div className="h-px w-24 bg-gray-100 mx-auto mb-8"></div>
           <p className="text-gray-500 text-sm font-bold">
             Powered by <a href="https://www.dodigital.marketing" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-700 transition-all underline underline-offset-8 decoration-2 decoration-red-100 hover:decoration-red-600">Do Digital Marketing</a>

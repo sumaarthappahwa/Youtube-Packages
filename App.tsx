@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
-import { PACKAGES, COMMON_BENEFITS } from './constants';
-import { Button } from './components/Button';
-import { getAiStrategyRecommendation } from './services/geminiService';
+import { PACKAGES, COMMON_BENEFITS } from './constants.ts';
+import { Button } from './components/Button.tsx';
+import { getAiStrategyRecommendation } from './services/geminiService.ts';
 
 const REVIEWS = [
   {
@@ -33,7 +32,6 @@ const CASE_STUDIES = [
     subscribers: "+1.8K",
     watchTime: "7.2K",
     description: "Exponential growth achieved through strategic SEO and viral content hooks. We optimized the channel for long-term algorithmic retention.",
-    // Placeholder representing the provided analytics screenshot
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200" 
   },
   {
@@ -43,7 +41,6 @@ const CASE_STUDIES = [
     subscribers: "+76",
     watchTime: "111.8",
     description: "Niche lead generation for a car dealership. Every view was crafted to reach high-intent local buyers, resulting in direct showroom visits.",
-    // Placeholder representing the provided analytics screenshot
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200"
   }
 ];
@@ -126,13 +123,13 @@ const App: React.FC = () => {
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">Proven Results</h2>
-            <p className="text-gray-400 max-w-lg mx-auto font-medium italic">Verified data from our active client portfolio (Anonymized for client privacy).</p>
+            <p className="text-gray-400 max-w-lg mx-auto font-medium italic">Verified data from our active client portfolio.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {CASE_STUDIES.map((study, idx) => (
               <div key={idx} className="group relative">
-                <div className="bg-gray-900/50 backdrop-blur-xl border border-white/5 rounded-[3rem] overflow-hidden transition-all duration-500 hover:border-red-500/30 hover:shadow-[0_0_80px_rgba(220,38,38,0.2)]">
+                <div className="bg-gray-900/50 backdrop-blur-xl border border-white/5 rounded-[3rem] overflow-hidden transition-all duration-500 hover:border-red-500/30">
                   <div className="p-10">
                     <div className="flex justify-between items-start mb-8">
                       <div>
@@ -196,7 +193,7 @@ const App: React.FC = () => {
             <div className="relative">
               <textarea 
                 className="w-full h-32 px-6 py-4 rounded-[2rem] border-2 border-gray-200 focus:border-red-600 outline-none transition-all font-semibold resize-none text-gray-700 bg-white"
-                placeholder="Example: I want to build a personal brand for my car dealership and get 5 qualified sales inquiries per week..."
+                placeholder="Example: I want to build a personal brand for my car dealership..."
                 value={userGoal}
                 onChange={(e) => setUserGoal(e.target.value)}
               />
@@ -217,15 +214,15 @@ const App: React.FC = () => {
             </Button>
 
             {aiRecommendation && (
-              <div className="mt-8 p-8 bg-white border border-red-100 rounded-[2rem] animate-in fade-in slide-in-from-bottom-4 duration-500 shadow-xl">
+              <div className="mt-8 p-8 bg-white border border-red-100 rounded-[2rem] animate-in fade-in shadow-xl">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">AI Matching Result</div>
+                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">AI Result</div>
                   <h4 className="text-xl font-black">Recommended: <span className="text-red-600">{aiRecommendation.plan}</span></h4>
                 </div>
                 <p className="text-gray-600 font-medium leading-relaxed italic">"{aiRecommendation.reasoning}"</p>
                 <div className="mt-6 flex justify-end">
                   <Button variant="outline" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
-                    Explore This Package
+                    Explore Plan
                   </Button>
                 </div>
               </div>
@@ -248,7 +245,7 @@ const App: React.FC = () => {
                 key={pkg.id}
                 className={`relative flex flex-col p-8 rounded-[3rem] border transition-all duration-500 group ${
                   pkg.isPopular 
-                    ? 'bg-white border-red-600 ring-4 ring-red-50 shadow-[0_40px_80px_rgba(220,38,38,0.1)] scale-105 z-10' 
+                    ? 'bg-white border-red-600 ring-4 ring-red-50 shadow-xl scale-105 z-10' 
                     : 'bg-white border-gray-100 hover:border-red-200 hover:shadow-2xl shadow-sm'
                 }`}
               >
@@ -284,15 +281,9 @@ const App: React.FC = () => {
                   <ul className="space-y-4">
                     {pkg.features.map((feature, idx) => (
                       <li key={idx} className={`flex items-start gap-3 text-sm ${feature.included ? 'text-gray-700' : 'text-gray-300'}`}>
-                        {feature.included ? (
-                          <div className={`mt-0.5 p-0.5 rounded-full ${feature.highlight ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
-                          </div>
-                        ) : (
-                          <div className="mt-0.5 p-0.5 rounded-full bg-gray-100 text-gray-300">
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12"></path></svg>
-                          </div>
-                        )}
+                        <div className={`mt-0.5 p-0.5 rounded-full ${feature.included ? (feature.highlight ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600') : 'bg-gray-100 text-gray-300'}`}>
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d={feature.included ? "M5 13l4 4L19 7" : "M6 18L18 6M6 6l12 12"}></path></svg>
+                        </div>
                         <span className={`${feature.highlight ? 'font-black text-gray-900' : 'font-semibold'} ${!feature.included ? 'line-through' : ''}`}>
                           {feature.text}
                         </span>
@@ -309,93 +300,8 @@ const App: React.FC = () => {
                 >
                   Get Started Now
                 </Button>
-                
-                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between text-[10px] text-gray-400 font-black uppercase tracking-widest">
-                  <span className="flex items-center gap-1.5">
-                    <svg className="w-3.5 h-3.5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-                    {pkg.support[pkg.support.length-1]} Support
-                  </span>
-                  <span className="bg-gray-100 px-2 py-0.5 rounded-md text-gray-500">
-                    {pkg.platforms.length} Platforms
-                  </span>
-                </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Google Reviews Section */}
-      <section className="py-24 bg-white px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-gray-900 mb-4 tracking-tight">Real People, Real Results</h2>
-            <div className="flex items-center justify-center gap-1.5 text-orange-400 mb-3">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} className="w-6 h-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-              ))}
-            </div>
-            <p className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Verified Google Agency Reviews</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {REVIEWS.map((review, idx) => (
-              <div key={idx} className="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300">
-                <p className="text-gray-600 font-medium italic mb-8 leading-relaxed text-lg">"{review.text}"</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center text-red-600 font-black text-xl">
-                    {review.name[0]}
-                  </div>
-                  <div>
-                    <div className="font-black text-gray-900">{review.name}</div>
-                    <div className="text-xs text-gray-400 font-bold uppercase tracking-widest">{review.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-16 text-center">
-            <a 
-              href="https://share.google/XNzsUe3Kd890YLowU" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="inline-flex items-center gap-2 text-red-600 font-black hover:gap-3 transition-all duration-300 uppercase tracking-widest text-xs"
-            >
-              READ ALL 50+ REVIEWS
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-24 bg-white px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-          <div className="relative group px-4">
-            <img 
-              src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800" 
-              alt="Strategic Marketing Team" 
-              className="rounded-[3rem] shadow-2xl relative z-10"
-            />
-            <div className="absolute -inset-8 bg-red-100/40 rounded-[3rem] blur-3xl -z-10"></div>
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-red-600 rounded-full -z-10 flex items-center justify-center text-white text-[10px] font-black text-center p-4 shadow-2xl transform group-hover:scale-110 transition-transform uppercase tracking-widest">
-              Quality Guaranteed
-            </div>
-          </div>
-          <div className="space-y-10">
-            <h2 className="text-4xl md:text-5xl font-black leading-[1.1] text-gray-900 tracking-tight">Beyond Simple Posting. We Build Brands.</h2>
-            <div className="space-y-4">
-              {COMMON_BENEFITS.map((benefit, idx) => (
-                <div key={idx} className="flex gap-5 p-6 rounded-[2.5rem] bg-gray-50 border border-transparent hover:border-red-100 hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                  <div className="w-14 h-14 rounded-2xl bg-white text-red-600 flex items-center justify-center flex-shrink-0 font-black text-xl shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors">
-                    {idx + 1}
-                  </div>
-                  <div>
-                    <h4 className="font-black text-lg text-gray-900">{benefit}</h4>
-                    <p className="text-gray-400 text-[10px] mt-1 font-black uppercase tracking-widest">Expert Execution</p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -411,7 +317,7 @@ const App: React.FC = () => {
         </div>
       </footer>
 
-      {/* WhatsApp Floating Button */}
+      {/* WhatsApp Link */}
       <a 
         href="https://wa.me/917217873028" 
         target="_blank" 
